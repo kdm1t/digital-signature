@@ -6,7 +6,6 @@ import jakarta.mail.internet.MimeMultipart;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Properties;
 
 public class MailTools {
@@ -28,10 +27,9 @@ public class MailTools {
         for (int partCount = 0; partCount < multiPart.getCount(); partCount++) {
             MimeBodyPart part = (MimeBodyPart) multiPart.getBodyPart(partCount);
             if (Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
-                //TODO: Тут сделать так, чтобы для каждого письма создавался свой отдельный файл с хэшем
-                File file = new File(path);
-                if (!file.exists()) {
-                    file.mkdir();
+                File folder = new File(path);
+                if (!folder.exists()) {
+                    folder.mkdir();
                 }
                 part.saveFile(path + File.separator + part.getFileName());
             }
@@ -50,7 +48,7 @@ public class MailTools {
     }
 
     private static String getTextFromMimeMultipart(
-            MimeMultipart mimeMultipart)  throws MessagingException, IOException{
+            MimeMultipart mimeMultipart) throws MessagingException, IOException {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mimeMultipart.getCount(); i++) {
             BodyPart bodyPart = mimeMultipart.getBodyPart(i);

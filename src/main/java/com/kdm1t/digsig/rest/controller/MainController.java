@@ -15,7 +15,7 @@ public class MainController {
 
     private final MailService mailService;
 
-    @RequestMapping(value = {"/sender"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/sender", method = RequestMethod.GET)
     public String getIndex(Model model) {
         model.addAttribute("email", new SendEmailRequest());
         return "sender";
@@ -32,11 +32,10 @@ public class MainController {
         return "sender";
     }
 
-    @RequestMapping(value = {"/receiver"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/receiver", method = RequestMethod.GET)
     public String getMessages(Model model) {
         model.addAttribute("messages", mailService.readInboundEmails());
         return "receiver";
     }
-
 
 }
