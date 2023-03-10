@@ -13,7 +13,7 @@ public class KeysController {
     @GetMapping(value = "/generate_keys", produces = MediaType.APPLICATION_JSON_VALUE)
     private String generateKeys() throws Exception {
         KeysTools.generateKeys();
-        KeysTools.updateKeyFactory(KeysTools.RSA);
+        KeysTools.updateKeyFactory();
         return KeysTools.KEYS_PATH;
     }
 
