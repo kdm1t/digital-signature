@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Handing Form Submission</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/styles/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Messages</h1>
+<table>
+  <thead>
+  <tr>
+    <th> Number               </th>
+    <th> From                 </th>
+    <th> Subject              </th>
+    <th> Message              </th>
+    <th> Message Date         </th>
+    <th> Hash check status    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${messages.isEmpty()}">
+    <td colspan="2"> No Messages </td>
+  </tr>
+  <tr th:each="message : ${messages}">
+    <td><span th:text="${message.number}"> Number             </span></td>
+    <td><span th:text="${message.from}"> From                 </span></td>
+    <td><span th:text="${message.subject}"> Subject           </span></td>
+    <td><span th:text="${message.message}"> Message           </span></td>
+    <td><span th:text="${message.messageDate}"> Message Date  </span></td>
+    <td><span th:text="${message.checkStatus}">Check status   </span> </td>
+  </tr>
+  </tbody>
+</table>
+</form>
+
+
+</body>
+</html>
