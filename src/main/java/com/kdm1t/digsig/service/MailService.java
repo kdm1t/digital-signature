@@ -61,12 +61,14 @@ public class MailService {
             Message[] messages = inbox.getMessages();//read messages
             for (int i = 0; i < messages.length; i++) {
                 Message msg = messages[i];
-                MailTools.saveAttachmentsFromMessage(msg, "Z:/keys/Hash" + File.separator + i);
+                MailTools.saveAttachmentsFromMessage(msg, "Z:/keys/Hash/" + i);
                 EmailMessageResponse response = new EmailMessageResponse(
                         i,
                         getSenders(msg.getFrom()),
                         msg.getSubject(),
-                        MailTools.getTextFromMessage(msg),
+                        MailTools.getTextFromMessage(msg).trim(),
+                        //TODO: trim() - Временное решение.
+                        // В конце сообщений, состоящих ТОЛЬКО из латиницы, добавляется \r\n при чтении контента
                         msg.getReceivedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
                 );
                 response.setCheckStatus(checkMessage(response.getMessage(), response.getNumber()) ? EmailStatus.OK : EmailStatus.ERROR);
