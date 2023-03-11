@@ -29,7 +29,7 @@ public class MailTools {
             if (Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
                 File folder = new File(path);
                 if (!folder.exists()) {
-                    folder.mkdir();
+                    folder.mkdirs();
                 }
                 part.saveFile(path + File.separator + part.getFileName());
             }
